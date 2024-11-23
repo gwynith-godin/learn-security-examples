@@ -31,5 +31,11 @@ This will create a database in MongoDB called __infodisclosure__. Verify its pre
 Answer the following:
 
 1. Briefly explain the potential vulnerabilities in **insecure.ts** that can lead to a DoS attack.
+- This is a classic denial of service because we passed a string and id is a mongo id, which is a specific format. If the ID is not in that format, it will error out. 
 2. Briefly explain how a malicious attacker can exploit them.
+- Using the get service, which retrieves the id form the query. If an attacker were to craft an ID which ends up crashing findOne, the server will crash. 
+- Craft an input and a few of them could crash the server using a Dos. 
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the DoS vulnerability?
+- Proper error handling so we do not crash unexpectedly
+- sanitize the input. check if the user input is sanitized and make sure it is the expected format (24-char alphanumeric string). We dont actually do this in in **secure.ts**.
+- rate limiter - define a middlewear function that is going to check if the rate limit is appropriate- every ip can send one request every 5 seconds- limit the amount of requests you can send per ip address so even if they cause harm they cannot cause too much harm.

@@ -30,5 +30,23 @@ This example demonstrates spoofind through two ways -- Stealing cookies programm
 ## For you to answer
 
 1. Briefly explain the spoofing vulnerability in **insecure.ts**.
+
+- If the session is set, then we assume that the user is authenticated
+- With every subsequent request, cookies get sent to the server so it can remember the user
+- The session management is insecure because the cookie can be read programatically, so a malicious user can access the cookie.
+
+
 2. Briefly explain different ways in which vulnerability can be exploited.
+
+- Server might not know where the HTTP request came from
+- taking an authentication token and storing it as a cookie
+- Because of the HTTP protocol, the cookie will reamin the same with every request once the user has authenticated the token, so this makes us vulnerable to session hijacking
+- Any malicious user with access to the token can carry out a spoofing attack, regardless of if they know the users credentials or not. They can access this token by:
+    - programatically reading the cookie
+    - trick user into sending a fake request to itself then to the server
+    - CSRF attacks
+
 3. Briefly explain why **secure.ts** does not have the spoofing vulnerability in **insecure.ts**.
+- setting the cookie httpOnly to true and sameSite to true
+- prevents other domains from sending a request to the server
+- prevents cookie stealing and CSRF

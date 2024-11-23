@@ -31,5 +31,8 @@ This will create a database in MongoDB called __infodisclosure__. Verify its pre
 Answer the following:
 
 1. Briefly explain the potential vulnerabilities in **insecure.ts**
+- The username poriton of the code only checks for a string, so a user can put anything in there without any checks. 
 2. Briefly explain how a malicious attacker can exploit them.
+- There are opportunities for hackers to input a NoSQL query into the username input. 
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the information disclosure vulnerability?
+- Uses username.replace to remove non-alphanumeric characters that could be used by malicious users.
